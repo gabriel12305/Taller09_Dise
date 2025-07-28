@@ -3,6 +3,9 @@ public class Medico {
     private String especialidad;
 
     public Medico(String nombre, String especialidad) {
+        if(nombre.isEmpty()){
+            throw new IllegalArgumentException("Nombre no puede estar vacío");
+        }
         this.nombre = nombre;
         this.especialidad = especialidad;
     }

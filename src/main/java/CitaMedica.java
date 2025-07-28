@@ -18,7 +18,10 @@ public class CitaMedica {
     public LocalDateTime getFechaHora() { return fechaHora; }
     public String getEstado() { return estado; }
 
-    public void setEstado(String estado) { this.estado = estado; }
+    public void setEstado(String estado) { 
+        if (estado == null) {
+            throw new IllegalArgumentException("Estado no puede ser nulo");
+        }this.estado = estado; }
 
     @Override
     public String toString() {
