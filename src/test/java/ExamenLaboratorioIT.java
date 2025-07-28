@@ -3,8 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
@@ -21,11 +22,12 @@ public class ExamenLaboratorioIT {
     @Test
     public void testRegistrarResultado() {
         System.out.println("registrarResultado");
-        String resultado = "";
-        ExamenLaboratorio instance = null;
+        String resultado = "Positivo";
+        Paciente pacienteInstance = new Paciente("0961238761", "Danilo", "dani@gmail.com");
+        ExamenLaboratorio instance = new ExamenLaboratorio(pacienteInstance, "Examen de Ojo");
         instance.registrarResultado(resultado);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(resultado, instance.getResultado());
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -34,12 +36,10 @@ public class ExamenLaboratorioIT {
     @Test
     public void testToString() {
         System.out.println("toString");
-        ExamenLaboratorio instance = null;
-        String expResult = "";
+        Paciente pacienteInstance = new Paciente("0961238761", "Danilo", "dani@gmail.com");
+        ExamenLaboratorio instance = new ExamenLaboratorio(pacienteInstance, "Examen de Autismo");
         String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(result.endsWith("Pendiente")); 
     }
     
 }
