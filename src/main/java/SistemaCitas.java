@@ -7,35 +7,42 @@ public class SistemaCitas {
     private List<CitaMedica> citas = new ArrayList<>();
     private List<ExamenLaboratorio> examenes = new ArrayList<>();
 
-    public void registrarPaciente(String cedula, String nombre, String correo) {
-        pacientes.add(new Paciente(cedula, nombre, correo));
+    public Paciente registrarPaciente(String cedula, String nombre, String correo) {
+        Paciente paciente = new Paciente(cedula, nombre, correo);
+        pacientes.add(paciente);
+        return paciente;
     }
-
+    
     public void registrarMedico(String nombre, String especialidad) {
         medicos.add(new Medico(nombre, especialidad));
     }
 
-    public void agendarCita(String cedulaPaciente, String especialidad, LocalDateTime fechaHora) {
+    public CitaMedica agendarCita(String cedulaPaciente, String especialidad, LocalDateTime fechaHora) {
         Paciente p = buscarPaciente(cedulaPaciente);
         if (p == null) {
             System.out.println("Paciente no encontrado.");
-            return;
+            return null;
         }
         Medico m = medicos.stream()
             .filter(med -> med.getEspecialidad().equalsIgnoreCase(especialidad))
             .findFirst().orElse(null);
         if (m == null) {
             System.out.println("No hay médico disponible.");
-            return;
+            return null;
         }
-        citas.add(new CitaMedica(p, m, fechaHora));
+        CitaMedica citaMedica = new CitaMedica(p, m, fechaHora);
+        citas.add(citaMedica);
+        return citaMedica;
     }
 
-    public void solicitarExamen(String cedulaPaciente, String tipoExamen) {
+    public ExamenLaboratorio solicitarExamen(String cedulaPaciente, String tipoExamen) {
         Paciente p = buscarPaciente(cedulaPaciente);
         if (p != null) {
-            examenes.add(new ExamenLaboratorio(p, tipoExamen));
+            ExamenLaboratorio examenLaboratorio = new ExamenLaboratorio(p, tipoExamen);
+            examenes.add(examenLaboratorio);
+            return examenLaboratorio;
         }
+        return null;
     }
 
     public void registrarResultado(String cedulaPaciente, String tipoExamen, String resultado) {
@@ -61,5 +68,17 @@ public class SistemaCitas {
         return pacientes.stream()
             .filter(p -> p.getCedula().equals(cedula))
             .findFirst().orElse(null);
+    }
+    public List<Paciente> getPacientes() {
+        return pacientes;
+    }
+    public List<Medico> getMedicos() {
+        return medicos;
+    }
+    public List<CitaMedica> getCitas() {
+        return citas;
+    }
+    public List<ExamenLaboratorio> getExamenes() {
+        return examenes;
     }
 }

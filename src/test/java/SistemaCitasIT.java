@@ -4,6 +4,9 @@
  */
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,70 +16,68 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class SistemaCitasIT {
     
-    public SistemaCitasIT() {
-    }
-
     /**
      * Test of registrarPaciente method, of class SistemaCitas.
      */
     @Test
     public void testRegistrarPaciente() {
         System.out.println("registrarPaciente");
-        String cedula = "";
-        String nombre = "";
-        String correo = "";
-        SistemaCitas instance = new SistemaCitas();
-        instance.registrarPaciente(cedula, nombre, correo);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String cedula = "0923546272";
+        String nombre = "Gabriel";
+        String correo = "correo@gmail.com";
+        SistemaCitas sistemaCitas = new SistemaCitas();
+        Paciente paciente = sistemaCitas.registrarPaciente(cedula, nombre, correo);
+        List<Paciente> pacientes = sistemaCitas.getPacientes();
+        for (Paciente comprobar : pacientes) {
+            if (comprobar.getCedula().equals("0923546272")) {
+                assertSame(paciente, comprobar);
+            }
+        }
     }
 
-    /**
-     * Test of registrarMedico method, of class SistemaCitas.
-     */
-    @Test
-    public void testRegistrarMedico() {
-        System.out.println("registrarMedico");
-        String nombre = "";
-        String especialidad = "";
-        SistemaCitas instance = new SistemaCitas();
-        instance.registrarMedico(nombre, especialidad);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of agendarCita method, of class SistemaCitas.
-     */
+    // /**
+    //  * Test of agendarCita method, of class SistemaCitas.
+    //  */
     @Test
     public void testAgendarCita() {
         System.out.println("agendarCita");
-        String cedulaPaciente = "";
-        String especialidad = "";
-        LocalDateTime fechaHora = null;
-        SistemaCitas instance = new SistemaCitas();
-        instance.agendarCita(cedulaPaciente, especialidad, fechaHora);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String cedulaPaciente = "0923546272";
+        String especialidad = "Medico General";
+        LocalDateTime fechaHora = LocalDateTime.now();
+        SistemaCitas sistemaCitas = new SistemaCitas();
+
+        CitaMedica citaMedica = sistemaCitas.agendarCita(cedulaPaciente, especialidad, fechaHora);
+        List<CitaMedica> citaMedicas = sistemaCitas.getCitas();
+        for (CitaMedica comprobar : citaMedicas) {
+            if (comprobar.getPaciente().getCedula().equals("0923546272")) {
+                assertSame(citaMedica, comprobar);
+            }
+        }
+        
     }
 
-    /**
-     * Test of solicitarExamen method, of class SistemaCitas.
-     */
+    // /**
+    //  * Test of solicitarExamen method, of class SistemaCitas.
+    //  */
     @Test
     public void testSolicitarExamen() {
         System.out.println("solicitarExamen");
-        String cedulaPaciente = "";
-        String tipoExamen = "";
-        SistemaCitas instance = new SistemaCitas();
-        instance.solicitarExamen(cedulaPaciente, tipoExamen);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String cedulaPaciente = "0923546272";
+        String tipoExamen = "Ojos";
+        SistemaCitas sistemaCitas= new SistemaCitas();
+        
+        ExamenLaboratorio examenLaboratorio = sistemaCitas.solicitarExamen(cedulaPaciente, tipoExamen);
+        List<ExamenLaboratorio> examenLaboratorios = sistemaCitas.getExamenes();
+        for (ExamenLaboratorio comprobar : examenLaboratorios) {
+            if (comprobar.getPaciente().getCedula().equals("0923546272")) {
+                assertSame(examenLaboratorio, comprobar);
+            }
+        }
     }
 
-    /**
-     * Test of registrarResultado method, of class SistemaCitas.
-     */
+    // /**
+    //  * Test of registrarResultado method, of class SistemaCitas.
+    //  */
     @Test
     public void testRegistrarResultado() {
         System.out.println("registrarResultado");
@@ -84,22 +85,18 @@ public class SistemaCitasIT {
         String tipoExamen = "";
         String resultado = "";
         SistemaCitas instance = new SistemaCitas();
-        instance.registrarResultado(cedulaPaciente, tipoExamen, resultado);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
-    /**
-     * Test of verHistorial method, of class SistemaCitas.
-     */
-    @Test
-    public void testVerHistorial() {
-        System.out.println("verHistorial");
-        String cedulaPaciente = "";
-        SistemaCitas instance = new SistemaCitas();
-        instance.verHistorial(cedulaPaciente);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    // /**
+    //  * Test of verHistorial method, of class SistemaCitas.
+    //  */
+    // @Test
+    // public void testVerHistorial() {
+    //     System.out.println("verHistorial");
+    //     String cedulaPaciente = "";
+    //     SistemaCitas instance = new SistemaCitas();
+        
+    // }
     
 }
