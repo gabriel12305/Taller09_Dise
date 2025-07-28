@@ -12,7 +12,7 @@
             <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
-    </dependencies>
+    </dependencies>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
