@@ -17,72 +17,26 @@ public class CitaMedicaIT {
     }
 
     /**
-     * Test of getPaciente method, of class CitaMedica.
-     */
-    @Test
-    public void testGetPaciente() {
-        System.out.println("getPaciente");
-        CitaMedica instance = null;
-        Paciente expResult = null;
-        Paciente result = instance.getPaciente();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getMedico method, of class CitaMedica.
-     */
-    @Test
-    public void testGetMedico() {
-        System.out.println("getMedico");
-        CitaMedica instance = null;
-        Medico expResult = null;
-        Medico result = instance.getMedico();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getFechaHora method, of class CitaMedica.
-     */
-    @Test
-    public void testGetFechaHora() {
-        System.out.println("getFechaHora");
-        CitaMedica instance = null;
-        LocalDateTime expResult = null;
-        LocalDateTime result = instance.getFechaHora();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getEstado method, of class CitaMedica.
-     */
-    @Test
-    public void testGetEstado() {
-        System.out.println("getEstado");
-        CitaMedica instance = null;
-        String expResult = "";
-        String result = instance.getEstado();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of setEstado method, of class CitaMedica.
      */
     @Test
     public void testSetEstado() {
-        System.out.println("setEstado");
-        String estado = "";
-        CitaMedica instance = null;
-        instance.setEstado(estado);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Paciente paciente = new Paciente("0955461934", "Francis", "faloayza@espol.edu.ec");
+        Medico medico = new Medico("Aquiles", "Pediatra");
+        CitaMedica citamedica = new CitaMedica(paciente, medico, LocalDateTime.now());
+        citamedica.setEstado("nuevo");
+        assertEquals( "nuevo",citamedica.getEstado());
+    }
+
+    @Test
+    public void testSetEstadoFallido() {
+        Paciente paciente = new Paciente("0955461934", "Francis", "faloayza@espol.edu.ec");
+        Medico medico = new Medico("Aquiles", "Pediatra");
+        CitaMedica citamedica = new CitaMedica(paciente, medico, LocalDateTime.now());
+        Exception exception = assertThrows(IllegalArgumentException.class, ()-> {
+            citamedica.setEstado(null);
+        });
+        assertEquals("Estado no puede ser nulo", exception.getMessage());
     }
 
     /**
@@ -90,13 +44,12 @@ public class CitaMedicaIT {
      */
     @Test
     public void testToString() {
-        System.out.println("toString");
-        CitaMedica instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Paciente paciente = new Paciente("0955461934", "Francis", "faloayza@espol.edu.ec");
+        Medico medico = new Medico("Aquiles", "Pediatra");
+        CitaMedica citaMedica= new CitaMedica(paciente, medico, LocalDateTime.now());
+        LocalDateTime fechaHora =citaMedica.getFechaHora();
+        String estado= citaMedica.getEstado();
+        assertEquals("Cita con " + medico + " para " + paciente + " en " + fechaHora + " [" + estado + "]",citaMedica.toString());
     }
     
 }
