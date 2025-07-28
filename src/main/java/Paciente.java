@@ -4,9 +4,13 @@ public class Paciente {
     private String correo;
 
     public Paciente(String cedula, String nombre, String correo) {
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.correo = correo;
+        if(cedula =="" || cedula.length()!=10) {
+            throw new IllegalArgumentException("Cédula inválida");
+        }else{
+            this.cedula = cedula;
+            this.nombre = nombre;
+            this.correo = correo;
+        }
     }
 
     public String getCedula() { return cedula; }
